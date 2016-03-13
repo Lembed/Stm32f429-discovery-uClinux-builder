@@ -41,7 +41,7 @@ the build procedure:
 
 Build Instructions
 ==================
-* Install the package prerequres
+* Install the packages prerequred
 ```
    sh install.sh
 ```
