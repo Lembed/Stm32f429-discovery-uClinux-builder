@@ -1,8 +1,7 @@
 stm32f429-linux-builder
 ======================
-This is a simple tool designed to create a uClinux distribution for STM32f429
-Discovery board from [STMicroelectronics](http://www.st.com/). STM32F429 MCU
-offers the performance of ARM Cortex M4 core (with floating point unit) running
+This is a simple tool designed to create a uClinux distribution for STM32f429 Discovery board. 
+STM32F429I offers the performance of ARM Cortex M4 core (with floating point unit) running
 at 180 MHz while reaching reasonably lower static power consumption.
 
 
@@ -12,11 +11,9 @@ The builder requires that various tools and packages be available for use in
 the build procedure:
 
 * [OpenOCD](http://openocd.sourceforge.net/)
-  - OpenOCD 0.7.0 (and the 0.7.0-2 from Debian) can't write romfs to flash
-    because of a post-0.7.0-stable bug (bad flash detection on stm32f429).
-    You need to use 0.8.0 development version.
+
 ```
-    git clone git://git.code.sf.net/p/openocd/code openocd
+    git clone https://github.com/ntfreak/openocd.git openocd
     cd openocd
     ./bootstrap
     ./configure --prefix=/usr/local --enable-stlink
@@ -24,14 +21,19 @@ the build procedure:
     make
     sudo make install
 ```
+
 * Set ARM/uClinux Toolchain:
   - Download [arm-2010q1-189-arm-uclinuxeabi-i686-pc-linux-gnu.tar.bz2](https://sourcery.mentor.com/public/gnu_toolchain/arm-uclinuxeabi/arm-2010q1-189-arm-uclinuxeabi-i686-pc-linux-gnu.tar.bz2) from Mentor Graphics
   - only arm-2010q1 is known to work; don't use SourceryG++ arm-2011.03
+
 ```
+    wget https://sourcery.mentor.com/public/gnu_toolchain/arm-uclinuxeabi/arm-2010q1-189-arm-uclinuxeabi-i686-pc-linux-gnu.tar.bz2
     tar jxvf arm-2010q1-189-arm-uclinuxeabi-i686-pc-linux-gnu.tar.bz2
     export PATH=`pwd`/arm-2010q1/bin:$PATH
 ```
+
 * [genromfs](http://romfs.sourceforge.net/)
+
 ```
     sudo apt-get install genromfs
 ```
@@ -39,6 +41,11 @@ the build procedure:
 
 Build Instructions
 ==================
+* Install the package prerequres
+```
+   sh install.sh
+```
+
 * Simply execute ``make``, and it will fetch and build u-boot, linux kernel, and busybox from scratch:
 ```
     make
